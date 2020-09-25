@@ -3,7 +3,7 @@ service: default
 instance_class: F2
 
 env_variables:
-  DISCORD_WEBHOOK: %WEBHOOK%
+  DISCORD_WEBHOOK: "https://discordapp.com/api/webhooks/733168335948349471/HpMygarmZj-jphuBDi0JWbx2Hi1xvWwKD-pYt9QFuTeSCR8tvSyjNty-4kt1Kyp7E_GQ"
   MJ_APIKEY_PUBLIC: %MJ_APIKEY_PUBLIC%
   MJ_APIKEY_PRIVATE: %MJ_APIKEY_PRIVATE%
 
