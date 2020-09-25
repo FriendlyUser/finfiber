@@ -4,7 +4,7 @@ steps:
     args:
     - '-c'
     - |
-      sed -i 's/%DISCORD_WEBHOOK%/'${_DISCORD_WEBHOOK}'/g' app.yaml
+      sed -i 's/%WEBHOOK%/'${_DISCORD_WEBHOOK}'/g' app.yaml
       sed -i 's/%MJ_APIKEY_PUBLIC%/'${_MJ_APIKEY_PUBLIC}'/g' app.yaml
       sed -i 's/%MJ_APIKEY_PRIVATE%/'${_MJ_APIKEY_PRIVATE}'/g' app.yaml
       cat app.yaml
