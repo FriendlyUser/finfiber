@@ -3,10 +3,9 @@ service: default
 instance_class: F2
 
 env_variables:
-  BUCKET_NAME: "example-gcs-bucket"
-  DISCORD_WEBHOOK: "https://discordapp.com/api/webhooks/733168335948349471/HpMygarmZj-jphuBDi0JWbx2Hi1xvWwKD-pYt9QFuTeSCR8tvSyjNty-4kt1Kyp7E_GQ"
-  MJ_APIKEY_PUBLIC: "89c1f1993ca0ddbfa1492ef4a47744e4"
-  MJ_APIKEY_PRIVATE: "22364305ea7f6b0d7553cba0f28ec6dd"
+  DISCORD_WEBHOOK: %DISCORD_WEBHOOK%
+  MJ_APIKEY_PUBLIC: %MJ_APIKEY_PUBLIC%
+  MJ_APIKEY_PRIVATE: %MJ_APIKEY_PRIVATE%
 
 handlers:
 - url: /stylesheets
