@@ -3,9 +3,10 @@ service: default
 instance_class: F2
 
 env_variables:
-  DISCORD_WEBHOOK: "https://discordapp.com/api/webhooks/733168335948349471/HpMygarmZj-jphuBDi0JWbx2Hi1xvWwKD-pYt9QFuTeSCR8tvSyjNty-4kt1Kyp7E_GQ"
+  DISCORD_WEBHOOK: "https://discordapp.com/api/webhooks/777754645363818496/5iZNWA6vvKRAh4k7zHEi437Yw24xyx3ZY44MJWDnpq7HUBEasNko7fn_LSpiHlB00Esb"
   MJ_APIKEY_PUBLIC: %MJ_APIKEY_PUBLIC%
   MJ_APIKEY_PRIVATE: %MJ_APIKEY_PRIVATE%
+  TWITTER_BEARER_TOKEN: %TWITTER_BEARER_TOKEN%
 
 handlers:
 - url: /stylesheets
