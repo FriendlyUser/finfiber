@@ -1,7 +1,7 @@
 // pulls data from yahoo finance and returns data in json format
 package discord
 
-// http://localhost:3000/api/v1/book?quotes=BB.TO,ACB.TO
+// http://localhost:3000/api/v1/discord?quotes=BB.TO,ACB.TO
 import (
 	"log"
 	"os"
@@ -25,15 +25,15 @@ type DiscordWebhook struct {
 
 // Run tests with the following curl commands
 
-// curl -X POST -H "Content-Type: application/json" --data "{\"content\":\"john\",\"pass\":\"doe\"}" localhost:3000
+// curl -X POST -H "Content-Type: application/json" --data "{\"content\":\"john\",\"pass\":\"doe\"}" localhost:3000/api/v1/discord
 
-// curl -X POST -H "Content-Type: application/xml" --data "<discord><content>john</content><pass>doe</pass></discord>" localhost:3000
+// curl -X POST -H "Content-Type: application/xml" --data "<discord><content>john</content><pass>doe</pass></discord>" localhost:3000/api/v1/discord
 
-// curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "content=john&pass=doe" localhost:3000
+// curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "content=john&pass=doe" localhost:3000/api/v1/discord
 
-// curl -X POST -F content=john -F pass=doe http://localhost:3000
+// curl -X POST -F content=john -F pass=doe http://localhost:3000/api/v1/discord
 
-// curl -X POST "http://localhost:3000/?content=john&pass=doe"
+// curl -X POST "http://localhost:3000/api/v1/discord?content=john&pass=doe"
 
 func SendDiscordHook(c *fiber.Ctx) {
 
