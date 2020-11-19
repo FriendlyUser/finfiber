@@ -22,7 +22,7 @@ steps:
     waitFor:
       - deploy_go
 
- - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     id: cleanup
     args:
