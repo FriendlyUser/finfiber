@@ -1,16 +1,16 @@
 package twitter
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	twitter "github.com/FriendlyUser/finfiber/pkg/twitter/util"
 )
 
 // destructure the response to something meaningful
 // allow the inclusion of query params, etc ...
-func GetTwitterSimple(c *fiber.Ctx) {
+func GetTwitterSimple(c *fiber.Ctx) error {
 
 	body, err := twitter.MakeRequest()
 	if err != nil {
-		return
+		return err
 	}
-	c.JSON(body)
+	return c.JSON(body)
 }

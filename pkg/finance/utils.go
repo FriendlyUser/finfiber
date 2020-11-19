@@ -2,12 +2,12 @@ package finance
 
 // http://localhost:3000/api/v1/book?quotes=BB.TO,ACB.TO
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"unsafe"
 )
 
 func queryMulti(ctx *fiber.Ctx, key string) (values []string) {
-	valuesBytes := ctx.Fasthttp.QueryArgs().PeekMulti(key)
+	valuesBytes := ctx.Context().QueryArgs().PeekMulti(key)
 	values = make([]string, len(valuesBytes))
 	for i, v := range valuesBytes {
 		values[i] = getString(v)

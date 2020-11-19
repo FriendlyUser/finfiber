@@ -1,13 +1,12 @@
 package main
 
 import ( 
-  "github.com/gofiber/fiber"
+  "github.com/gofiber/fiber/v2"
   "github.com/FriendlyUser/finfiber/pkg/discord"
   "github.com/FriendlyUser/finfiber/pkg/finance"
   "github.com/FriendlyUser/finfiber/pkg/nlp"
   "github.com/FriendlyUser/finfiber/pkg/twitter"
   "os"
-  "strconv"
 )
 
 func getenv(key, fallback string) string {
@@ -21,7 +20,7 @@ func getenv(key, fallback string) string {
 // add function to check env vars before running
 func main() {
   app := fiber.New()
-  port, _ := strconv.Atoi(getenv("PORT", "8080"))
+  port := getenv("PORT", "8080")
   app.Get("/api/v1/tickers", finance.GetTickersPandas)
   app.Get("/api/v1/sentiment", nlp.GetSentiment)
   app.Get("/api/v1/twitter", twitter.GetTwitterSimple)

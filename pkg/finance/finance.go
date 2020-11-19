@@ -3,7 +3,7 @@ package finance
 
 // http://localhost:3000/api/v1/book?quotes=BB.TO,ACB.TO
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/piquette/finance-go/quote"
 	"fmt"
 )
@@ -16,7 +16,7 @@ type Message struct {
 	Index []string `json:"index"`
 }
 
-func GetTickersPandas(c *fiber.Ctx) {
+func GetTickersPandas(c *fiber.Ctx) error {
 	
 	quotes := queryMulti(c, "quotes")
 	iter := quote.List(quotes)
@@ -41,5 +41,5 @@ func GetTickersPandas(c *fiber.Ctx) {
 			q.ExchangeID})
 	}
 
-	c.JSON(Message{Data: stock_data, Index: used_symbols, Columns: columns})
+	return c.JSON(Message{Data: stock_data, Index: used_symbols, Columns: columns})
 }

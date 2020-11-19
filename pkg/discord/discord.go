@@ -5,7 +5,7 @@ package discord
 import (
 	"log"
 	"os"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"encoding/json"
 	"net/http"
 	"bytes"
@@ -35,7 +35,7 @@ type DiscordWebhook struct {
 
 // curl -X POST "http://localhost:3000/api/v1/discord?content=john&pass=doe"
 
-func SendDiscordHook(c *fiber.Ctx) {
+func SendDiscordHook(c *fiber.Ctx) error {
 
 	discordWebhook := new(DiscordWebhook)
 
@@ -53,5 +53,5 @@ func SendDiscordHook(c *fiber.Ctx) {
 	log.Println(resp)
 	log.Println(discordWebhook.Content) // john
 	log.Println(discordWebhook.Embeds) // doe
-	c.JSON(discordWebhook)
+	return c.JSON(discordWebhook)
 }
