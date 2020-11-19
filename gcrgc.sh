@@ -42,7 +42,7 @@ main(){
     )
     let C=C+1
   done
-  echo "Deleted ${C} images in ${IMAGE}." >&2
+  echo "Deleted ${C} images in ${IMAGE}." >&1
 }
 
-main "${1}" "${2}"
+main "${1}"
