@@ -11,14 +11,14 @@ steps:
     id: govars
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_go
-    args: ["goapp", "deploy"]
+    args: ["app", "deploy", "goapp.yaml"]
     timeout: "600s"
     waitFor:
       - govars
   
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_python
-    args: ["dashapp", "deploy"]
+    args: ["app", "deploy", "goapp.yaml"]
     timeout: "600s"
     waitFor:
       - deploy_go
