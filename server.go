@@ -2,10 +2,10 @@ package main
 
 import ( 
   "github.com/gofiber/fiber"
-  "github.com/FriendlyUser/finfiber/discord"
-  "github.com/FriendlyUser/finfiber/finance"
-  "github.com/FriendlyUser/finfiber/nlp"
-  "github.com/FriendlyUser/finfiber/twitter"
+  "github.com/FriendlyUser/finfiber/pkg/discord"
+  "github.com/FriendlyUser/finfiber/pkg/finance"
+  "github.com/FriendlyUser/finfiber/pkg/nlp"
+  "github.com/FriendlyUser/finfiber/pkg/twitter"
   "os"
   "strconv"
 )

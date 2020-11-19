@@ -1,7 +1,7 @@
 package twitter
 import (
 	"github.com/gofiber/fiber"
-	twitter "github.com/FriendlyUser/finfiber/twitter/util"
+	twitter "github.com/FriendlyUser/finfiber/pkg/twitter/util"
 )
 
 // destructure the response to something meaningful

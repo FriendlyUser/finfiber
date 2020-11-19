@@ -14,4 +14,7 @@ set GOOGLE_APPLICATION_CREDENTIALS=stocks-272500-1b406ea9557e.json
 go run server.go
 ```
 
-DO NOT OPEN SOURCE UNDER ANY CIRCUMSTANCES
+~~DO NOT OPEN SOURCE UNDER ANY CIRCUMSTANCES~~ changed env vars
+
+
+Eventually redo code structure following [project-layout](https://github.com/golang-standards/project-layout)
