@@ -21,3 +21,11 @@ steps:
     timeout: "600s"
     waitFor:
       - deploy_go
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+    - 'container'
+    - 'images'
+    - 'delete'
+    - 'gcr.io/stocks-272500/app-engine-tmp'
+    - '--quiet'
