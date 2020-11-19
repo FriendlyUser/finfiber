@@ -1,7 +1,7 @@
 package main
 
 import (
-	twitter "github.com/FriendlyUser/finfiber/twitter/util"
+	twitter "github.com/FriendlyUser/finfiber/pkg/twitter/util"
 	"log"
 )
 
