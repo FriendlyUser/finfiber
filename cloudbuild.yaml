@@ -22,12 +22,24 @@ steps:
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
-    id: cleanup
+    id: cleanup1
     args:
       - '-c'
       - |
         chmod +x gcrgc.sh
-        ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp
+        ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp/app/ttl-2h
+    waitFor:
+      - deploy_go
+      - deploy_python
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    id: cleanup2
+    args:
+      - '-c'
+      - |
+        chmod +x gcrgc.sh
+        ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp/app/build-cache/ttl-7d/python-cache
     waitFor:
       - deploy_go
       - deploy_python
