@@ -7,6 +7,7 @@ set GOOGLE_APPLICATION_CREDENTIALS=stocks-272500-1b406ea9557e.json
 
 - [ ] Sending email notifications
 - [x] Sending discord to webhook
+- [x] NLP via google - the google app engine instance has permission to call nlp functions
 
 #### To run
 
