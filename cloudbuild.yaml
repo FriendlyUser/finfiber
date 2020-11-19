@@ -30,6 +30,7 @@ steps:
         chmod +x gcrgc.sh
         ./gcrgc.sh us.gcr.io/stocks-272500/app-engine-tmp/app/ttl-2h $now
         ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp/app $now
+        ./gcrgc.sh us.gcr.io/stocks-272500/app-engine-tmp/app/ttl-2h/default/buildpack-app $now
     waitFor:
       - deploy_go
       - deploy_python
