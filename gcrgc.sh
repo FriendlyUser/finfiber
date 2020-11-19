@@ -16,7 +16,7 @@
 IFS=$'\n\t'
 set -eou pipefail
 
-if [[ "$#" -ne 2 || "${1}" == '-h' || "${1}" == '--help' ]]; then
+if [[ "${1}" == '-h' || "${1}" == '--help' ]]; then
   cat >&2 <<"EOF"
 gcrgc.sh cleans up tagged or untagged images pushed before specified date
 for a given repository (an image name without a tag/digest).
