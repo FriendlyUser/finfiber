@@ -1,19 +1,24 @@
-### Setup Finance Api
+# finfiber
 
-Various finance apis done using golang
+Finance apps microservices hosted on google cloud platform app engine.
 
+This contains various finance apis done using golang and microservices for various machine learning dash apps.
+
+#### To run locally
+
+Need google creds to run the nlp locally, the app engine service has permissions for nlp.
+```
 set GOOGLE_APPLICATION_CREDENTIALS=stocks-272500-1b406ea9557e.json
+```
 
-
+### Golang Features
+- [x] Using fiber v2
 - [ ] Sending email notifications
 - [x] Sending discord to webhook
 - [x] NLP via google - the google app engine instance has permission to call nlp functions
 
-#### To run
 
-```
-go run server.go
-```
+#### Other Notes
 
 ~~DO NOT OPEN SOURCE UNDER ANY CIRCUMSTANCES~~ changed env vars
 

@@ -22,10 +22,11 @@ steps:
     waitFor:
       - deploy_go
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+ - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    id: cleanup
     args:
-    - 'container'
-    - 'images'
-    - 'delete'
-    - 'gcr.io/stocks-272500/app-engine-tmp'
-    - '--quiet'
+    - '-c'
+    - |
+      chmod +x gcrgc.sh
+      ./gcrgc gcr.io/stocks-272500/app-engine-tmp
