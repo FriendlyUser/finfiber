@@ -22,5 +22,6 @@ set GOOGLE_APPLICATION_CREDENTIALS=stocks-272500-1b406ea9557e.json
 
 ~~DO NOT OPEN SOURCE UNDER ANY CIRCUMSTANCES~~ changed env vars
 
+As for the google cloud platform build CI script, USE WITH CAUTION. I was very unhappy getting charged 1 cent each month to pay for storage I never needed. Remove `gcrgc.sh` in a production environment.
 
 Eventually redo code structure following [project-layout](https://github.com/golang-standards/project-layout)

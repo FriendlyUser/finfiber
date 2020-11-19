@@ -19,14 +19,15 @@ steps:
     id: deploy_python
     args: ["app", "deploy", "dashapp.yaml"]
     timeout: "600s"
-    waitFor:
-      - deploy_go
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     id: cleanup
     args:
-    - '-c'
-    - |
-      chmod +x gcrgc.sh
-      ./gcrgc gcr.io/stocks-272500/app-engine-tmp
+      - '-c'
+      - |
+        chmod +x gcrgc.sh
+        ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp
+    waitFor:
+      - deploy_go
+      - deploy_python
