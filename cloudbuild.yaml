@@ -26,7 +26,7 @@ steps:
     args:
       - '-c'
       - |
-        now=$(date)
+        now=$(date +'%Y-%m-%d')
         chmod +x gcrgc.sh
         ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp/app/ttl-2h $now
         ./gcrgc.sh us.gcr.io/stocks-272500/app-engine-tmp/app/ttl-2h $now
@@ -41,7 +41,7 @@ steps:
     args:
       - '-c'
       - |
-        now=$(date)
+        now=$(date +'%Y-%m-%d')
         chmod +x gcrgc.sh
         ./gcrgc.sh gcr.io/stocks-272500/app-engine-tmp/build-cache/ttl-7d/python-cache $now
         ./gcrgc.sh us.gcr.io/stocks-272500/app-engine-tmp/build-cache/ttl-7d/python-cache $now
