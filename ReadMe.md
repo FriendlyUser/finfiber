@@ -12,12 +12,16 @@ set GOOGLE_APPLICATION_CREDENTIALS=stocks-272500-1b406ea9557e.json
 ```
 
 ### Golang Features
+In order for the golang paths to be resolved for future projects, I decided to have the main go file in the root.
+
 - [x] Using fiber v2
 - [ ] Sending email notifications
 - [x] Sending discord to webhook
 - [x] NLP via google - the google app engine instance has permission to call nlp functions
 
 
+
+### Python Features
 #### Other Notes
 
 ~~DO NOT OPEN SOURCE UNDER ANY CIRCUMSTANCES~~ changed env vars

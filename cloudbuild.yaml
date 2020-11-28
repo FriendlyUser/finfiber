@@ -19,6 +19,7 @@ steps:
     id: deploy_dash
     args: ["app", "deploy", "dashapp.yaml"]
     timeout: "600s"
+    dir: 'python/dash'
 
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_api
