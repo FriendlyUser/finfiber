@@ -17,8 +17,6 @@ wrapt==1.11.2
 youtube_dl==2020.11.26
 Jinja2==2.11.2
 polling==0.3.1
-Jinja2
-TextBlob
 # Spacy
 spacy
 https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.3.1/en_core_web_lg-2.3.1.tar.gz

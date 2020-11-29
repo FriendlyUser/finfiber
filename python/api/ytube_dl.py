@@ -17,6 +17,7 @@ def is_transcript_ready(response):
 
 def transcript_mp3(filename):
     # upload audio file
+    print(filename)
     api_token = os.getenv("ASSEMBLY_API_TOKEN")
     headers = {"authorization": api_token}
     response = requests.post(
@@ -30,6 +31,9 @@ def transcript_mp3(filename):
 
     # get the transcript id used to poll
     transcript_id = transcript_resp.get("id")
+    if transcript_id == None:
+        print(transcript_resp)
+        raise Exception(str(transcript_resp))
     endpoint = "https://api.assemblyai.com/v2/transcript/" + transcript_id
 
     headers = {
@@ -83,6 +87,7 @@ def read_file(filename, chunk_size=5242880):
 
 
 def get_video(video_id):
+    print(video_id)
     # video finished downloading
     global report_data
 
@@ -92,7 +97,9 @@ def get_video(video_id):
             print("Done downloading, now converting ...")
             filename = d["filename"]
             # send video to assemblyAI
-            output_file = os.path.splitext(filename)[0] + ".html"
+            if filename == None:
+                filename = "tempfile"
+            output_file = str(filename) + ".html"
             text_data = transcript_mp3(filename)
             print("Transcript Complete, generating report ...")
             report_data = vid_report(text_data, video_id, output_file)

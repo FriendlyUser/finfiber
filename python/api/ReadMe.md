@@ -9,3 +9,7 @@
 ## Todo
 
 Update functionality to not use polling, but a webhook instead.
+
+```
+python3.8 -m uvicorn pyfastapi:app
+```
