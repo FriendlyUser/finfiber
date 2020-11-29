@@ -15,18 +15,18 @@ steps:
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_go
     args: ["app", "deploy", "goapp.yaml"]
-    timeout: "600s"
+    timeout: "1200s"
   
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_dash
     args: ["app", "deploy", "dashapp.yaml"]
-    timeout: "600s"
+    timeout: "1200s"
     dir: 'python/dash'
 
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_api
     args: ["app", "deploy", "fastapi.yaml"]
-    timeout: "600s"
+    timeout: "1200s"
     dir: 'python/api'
 
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -38,7 +38,7 @@ steps:
         now=$(date --date="next Friday" +"%Y-%m-%d")
         chmod +x gcrgc.sh
         ./gcrgc.sh us.gcr.io/$PROJECT_ID/app-engine-tmp/app/ttl-2h $now
-        ./gcrgc.sh gcr.io/$PROJECT_ID/app-engine-tmp/app $now
+        ./gcrgc.sh us.gcr.io/$PROJECT_ID/app-engine-tmp/app $now
         ./gcrgc.sh us.gcr.io/$PROJECT_ID/app-engine-tmp/app/ttl-2h/default/buildpack-app $now
     waitFor:
       - deploy_go
@@ -51,7 +51,7 @@ steps:
       - |
         now=$(date --date="next Friday" +"%Y-%m-%d")
         chmod +x gcrgc.sh
-        ./gcrgc.sh gcr.io/$PROJECT_ID/app-engine-tmp/build-cache/ttl-7d/python-cache $now
+        ./gcrgc.sh us.gcr.io/$PROJECT_ID/app-engine-tmp/build-cache/ttl-7d/python-cache $now
         ./gcrgc.sh us.gcr.io/$PROJECT_ID/app-engine-tmp/build-cache/ttl-7d/python-cache $now
     waitFor:
       - deploy_dash
