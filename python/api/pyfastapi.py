@@ -1,6 +1,7 @@
 from typing import Optional
 from fastapi import FastAPI, Query, HTTPException
 from ytube_dl import get_video
+from webhook import send_content
 import uvicorn
 app = FastAPI()
 
@@ -25,6 +26,8 @@ def video(
         video_id = q
         try:
             video_data = get_video(video_id)
+            # send data to webhook
+            # send_content(video_data)
             return {"q": q, "video_data": video_data}
         except Exception as e:
             print(e)

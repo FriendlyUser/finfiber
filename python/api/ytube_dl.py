@@ -5,6 +5,7 @@ import requests
 import os
 from polling import TimeoutException, poll
 from gen_report import vid_report
+from webhook import send_file, send_content
 import json
 import datetime
 
@@ -103,6 +104,11 @@ def get_video(video_id):
             text_data = transcript_mp3(filename)
             print("Transcript Complete, generating report ...")
             report_data = vid_report(text_data, video_id, output_file)
+            try:
+                send_file(output_file, f"**Youtube Video** \n See https://www.youtube.com/watch?v={video_id} \n")
+            except Exception as e:
+                print(e)
+                send_content(e)
             return report_data
             # send data to nlp
 
