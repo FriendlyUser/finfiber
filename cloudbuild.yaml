@@ -15,12 +15,10 @@ steps:
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_go
     args: ["app", "deploy", "goapp.yaml"]
-    timeout: "1200s"
   
   - name: "gcr.io/cloud-builders/gcloud"
     id: deploy_dash
     args: ["app", "deploy", "dashapp.yaml"]
-    timeout: "1200s"
     dir: 'python/dash'
 
   - name: "gcr.io/cloud-builders/gcloud"
@@ -56,3 +54,4 @@ steps:
     waitFor:
       - deploy_dash
       - deploy_api
+timeout: 1200s
