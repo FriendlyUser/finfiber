@@ -1,7 +1,7 @@
 from __future__ import unicode_literals, print_function
 import spacy
-from jinja2 import Template
 import json
+from jinja2 import Template
 
 
 def convert(seconds):
