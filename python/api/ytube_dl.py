@@ -88,7 +88,7 @@ def read_file(filename, chunk_size=5242880):
 
 
 def get_video(video_id):
-    print(video_id)
+    print(f"Getting data for {video_id}")
     # video finished downloading
     global report_data
 
