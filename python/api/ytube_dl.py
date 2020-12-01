@@ -99,13 +99,16 @@ def get_video(video_id):
             filename = d["filename"]
             # send video to assemblyAI
             if filename == None:
-                filename = "tempfile"
+                filename = "/tmp/tempfile"
             output_file = str(filename) + ".html"
             text_data = transcript_mp3(filename)
             print("Transcript Complete, generating report ...")
             report_data = vid_report(text_data, video_id, output_file)
             try:
-                send_file(output_file, f"**Youtube Video** \n See https://www.youtube.com/watch?v={video_id} \n")
+                send_file(
+                    output_file,
+                    f"**Youtube Video** \n See https://www.youtube.com/watch?v={video_id} \n",
+                )
             except Exception as e:
                 print(e)
                 send_content(e)
@@ -114,7 +117,7 @@ def get_video(video_id):
 
     ydl_opts = {
         "format": "bestaudio/best",
-        "outtmpl": "recordings/%(title)s.%(ext)s",
+        "outtmpl": "/tmp/%(title)s.%(ext)s",
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",
