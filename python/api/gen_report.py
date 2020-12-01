@@ -14,7 +14,7 @@ def convert(seconds):
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 
-def vid_report(data, video_id, output_file, html_template="report.jinja2"):
+def vid_report(data, video_id, output_file, html_template="report.jinja2", write_file=True):
     # iterate across each word
     # if the word has the first letter capitalized
     # the sentence length is currently greater than 1
@@ -53,8 +53,9 @@ def vid_report(data, video_id, output_file, html_template="report.jinja2"):
 
     options = dict(Version="2.0.0", LINES=lines, VIDEO_ID=video_id)
     renderer_template = template.render(**options)
-    with open(output_file, "w", errors="ignore") as f:
-        f.write(renderer_template)
+    if write_file == True:
+        with open(output_file, "w", errors="ignore") as f:
+            f.write(renderer_template)
     return renderer_template
 
 

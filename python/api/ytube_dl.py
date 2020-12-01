@@ -16,6 +16,29 @@ def is_transcript_ready(response):
     return status == "completed"
 
 
+def handle_wbts(transcript_id):
+    endpoint = f"https://api.assemblyai.com/v2/transcript/{transcript_id}"
+    api_token = os.getenv("ASSEMBLY_API_TOKEN")
+    headers = {
+        "authorization": api_token,
+    }
+
+    response = requests.get(endpoint, headers=headers)
+    transcript = response.json()
+    output_file = "/tmp/output_file.html"
+    report_data = vid_report(transcript, video_id, output_file, True)
+    try:
+        print(report_data)
+        send_file(
+            output_file,
+            f"**Youtube Video** \n See https://www.youtube.com/watch?v={video_id} \n",
+        )
+        return report_data
+    except Exception as e:
+        pass
+    return transcript
+
+
 def transcript_mp3(filename, path=""):
     # upload audio file
     print(filename)
@@ -35,17 +58,14 @@ def transcript_mp3(filename, path=""):
     if transcript_id == None:
         print(transcript_resp)
         raise Exception(str(transcript_resp))
-    endpoint = "https://api.assemblyai.com/v2/transcript/" + transcript_id
+    endpoint = f"https://api.assemblyai.com/v2/transcript/{transcript_id}"
 
-    headers = {
-        "authorization": api_token,
-    }
+    headers = {"authorization": api_token, "content-type": "application/json"}
 
     if path != "":
-        print("Using path parameter")
-        print(headers)
-        headers["webhook"] = f"{path}/video/webhook"
-        print(headers)
+        json_data = {"webhook_url": f"{path}/video/webhook"}
+        response = requests.get(endpoint, json=json_data, headers=headers)
+        print(response)
         pass
     else:
         response = requests.get(endpoint, headers=headers)
@@ -96,7 +116,7 @@ def read_file(filename, chunk_size=5242880):
             yield data
 
 
-def get_video(video_id, path=""):
+def get_video(video_id, api_url=""):
     print(f"Getting data for {video_id}")
     # video finished downloading
     global report_data
@@ -106,11 +126,12 @@ def get_video(video_id, path=""):
         if d["status"] == "finished":
             print("Done downloading, now converting ...")
             filename = d["filename"]
+            api_url = os.getenv("API_URL")
             # send video to assemblyAI
             if filename == None:
                 filename = "/tmp/tempfile"
             output_file = str(filename) + ".html"
-            text_data = transcript_mp3(filename, path)
+            text_data = transcript_mp3(filename, api_url)
             print("Transcript Complete, generating report ...")
             report_data = vid_report(text_data, video_id, output_file)
             try:
@@ -144,8 +165,8 @@ def get_video(video_id, path=""):
     return report_data
 
 
-def main(video_id, path=""):
-    get_video(video_id, path)
+def main(video_id, api_url=""):
+    get_video(video_id, api_url)
 
 
 if __name__ == "__main__":
@@ -157,6 +178,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     video_id = args.video_id
     # make sure assemblyAI token is valid
-    main(video_id, path)
+    main(video_id, "")
     print("execution time: -----")
     print(datetime.datetime.now() - begin_time)
