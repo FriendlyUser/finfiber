@@ -3,6 +3,7 @@ from fastapi import FastAPI, Query, HTTPException
 from ytube_dl import get_video
 from webhook import send_content
 import uvicorn
+
 app = FastAPI()
 
 # domain where this api is hosted for example : localhost:5000/docs to see swagger documentation automagically generated.
@@ -22,6 +23,7 @@ def video(
         description="Query Params - should have youtube id",
     )
 ):
+    print("Visited video endpoint")
     if q:
         video_id = q
         try:
@@ -33,6 +35,7 @@ def video(
             print(e)
             raise HTTPException(status_code=404, detail=str(e))
     return {"error": "no id in query parameter"}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
