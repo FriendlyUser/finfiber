@@ -16,7 +16,7 @@ def is_transcript_ready(response):
     return status == "completed"
 
 
-def transcript_mp3(filename):
+def transcript_mp3(filename, path=""):
     # upload audio file
     print(filename)
     api_token = os.getenv("ASSEMBLY_API_TOKEN")
@@ -41,29 +41,38 @@ def transcript_mp3(filename):
         "authorization": api_token,
     }
 
-    response = requests.get(endpoint, headers=headers)
-    transcript = None
-    try:
-        transcript = poll(
-            lambda: requests.get(endpoint, headers=headers),
-            check_success=is_transcript_ready,
-            timeout=15 * 1000,
-            step=10,
-        )
-        # save data to examine
-        text_data = transcript.json()
-        text_file = filename + ".json"
-        # just use existing filename with appended json extension
-        with open(text_file, "w") as fp:
-            json.dump(text_data, fp)
-        return text_data
+    if path != "":
+        print("Using path parameter")
+        print(headers)
+        headers["webhook"] = f"{path}/video/webhook"
+        print(headers)
+        pass
+    else:
+        response = requests.get(endpoint, headers=headers)
+        transcript = None
+        # polling dont work on gae, switch to webhook
+        # The default request timeout for google appengine is 30 seconds. In long polling if the message takes more than 30 secs to generate, then it will fail. You are probably better off using short polling.
+        try:
+            transcript = poll(
+                lambda: requests.get(endpoint, headers=headers),
+                check_success=is_transcript_ready,
+                timeout=15 * 1000,
+                step=10,
+            )
+            # save data to examine
+            text_data = transcript.json()
+            text_file = filename + ".json"
+            # just use existing filename with appended json extension
+            with open(text_file, "w") as fp:
+                json.dump(text_data, fp)
+            return text_data
 
-    except TimeoutException as tee:
-        print("Value was not registered")
-        print(tee)
-        print(transcript)
-        # terminate here, taking longer to annotate video
-        raise Exception("FAILED TO ANNOTATE VIDEO IN TIME")
+        except TimeoutException as tee:
+            print("Value was not registered")
+            print(tee)
+            print(transcript)
+            # terminate here, taking longer to annotate video
+            raise Exception("FAILED TO ANNOTATE VIDEO IN TIME")
 
 
 def upload_video(audio_url):
@@ -87,7 +96,7 @@ def read_file(filename, chunk_size=5242880):
             yield data
 
 
-def get_video(video_id):
+def get_video(video_id, path=""):
     print(f"Getting data for {video_id}")
     # video finished downloading
     global report_data
@@ -101,7 +110,7 @@ def get_video(video_id):
             if filename == None:
                 filename = "/tmp/tempfile"
             output_file = str(filename) + ".html"
-            text_data = transcript_mp3(filename)
+            text_data = transcript_mp3(filename, path)
             print("Transcript Complete, generating report ...")
             report_data = vid_report(text_data, video_id, output_file)
             try:
@@ -135,8 +144,8 @@ def get_video(video_id):
     return report_data
 
 
-def main(video_id):
-    get_video(video_id)
+def main(video_id, path=""):
+    get_video(video_id, path)
 
 
 if __name__ == "__main__":
@@ -148,6 +157,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     video_id = args.video_id
     # make sure assemblyAI token is valid
-    main(video_id)
+    main(video_id, path)
     print("execution time: -----")
     print(datetime.datetime.now() - begin_time)
